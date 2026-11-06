@@ -249,7 +249,7 @@ This command is very important as it ensures you are working on the code that's 
 
 **Option 1: Create a new file.**
 
-If you want to create a new file, you will do so using **File --> New...** in your IntelliJ IDEA menu.sh
+If you want to create a new file, you will do so using **File → New...** in your IntelliJ IDEA menu.
 Then, in your built in IntelliJ IDEA terminal, stage your changes using
 `git add` followed by the file's name that you just created:
 
@@ -257,7 +257,7 @@ Then, in your built in IntelliJ IDEA terminal, stage your changes using
 git add <file_name>
 ```
 
-For example, if you just created a new class called `Task.java`:
+For example, if you just created a new class called `Task.java`, you write this in Intelli terminal:
 
 ```sh
 git add Task.java
@@ -266,7 +266,7 @@ git add Task.java
 **Option 2: Edit an existing file.**
 
 The same Git command is used when making changes in your files.
-For example, if you just finished coding in `Main.java`, you would type this in your Intelli terminal:
+For example, if you just finished coding in `Main.java`, you would type this in terminal:
 
 ```sh
 git add Task.java
@@ -280,6 +280,7 @@ git add Task.java
 ```sh
 git add Main.java Task.java
 ```
+Yes, you read it right. There is no comma between the files.
 
 **Stage all changes at once:**
 
