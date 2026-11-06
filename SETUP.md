@@ -1,6 +1,16 @@
 # Productivity App — Setup Guide
 
-Use this guide to set up your local project and work with the team through GitHub.
+Use this guide to set up your local project and collaborate on the code by
+integrating GitHub with IntelliJ IDEA.
+
+You will **clone** the existing repository. Cloning automatically downloads the
+entire project onto your computer and connects the local folder to our shared
+GitHub repository.
+
+This guide also explains which terminal commands to use when you make changes:
+**stage** your files, **commit** your changes, and **push** them to GitHub so your
+teammates can see and download your updates. It also shows how to **pull** your
+teammates' latest changes before you start working.
 
 ## Contents
 
@@ -14,14 +24,14 @@ Use this guide to set up your local project and work with the team through GitHu
 
 Before getting started, make sure you have:
 
-* Git installed.
-* IntelliJ IDEA installed.
-* Access to our GitHub repository as a collaborator.
-* A GitHub account.
+- Git installed.
+- IntelliJ IDEA installed.
+- Access to our GitHub repository as a collaborator.
+- A GitHub account.
 
 ### Check if Git is installed
 
-Open the built-in IntelliJ Terminal and run:
+Open the built-in IntelliJ Terminal (located on the bottom left) and run:
 
 ```sh
 git --version
@@ -209,7 +219,9 @@ Download the latest changes from GitHub:
 git pull origin main
 ```
 
-### After making changes: stage files
+### After making changes
+
+#### 1. Stage files
 
 After you create a new file or edit an existing one, stage your changes using
 `git add` followed by the file's path relative to the project root:
@@ -242,9 +254,15 @@ Stage all changes under the current directory, including new, modified, and dele
 git add .
 ```
 
+> **Important:** Add is case sensitive. Make sure to match the file name's capitalization when staging changes. For a file named `SETUP.md`, enter:
+>
+> ```sh
+> git add SETUP.md
+> ```
+
 > **Tip:** If other files contain incomplete work, stage individual files instead of using `git add .`.
 
-### Commit changes locally
+#### 2. Commit changes locally
 
 Save your staged changes as a local commit:
 
@@ -254,9 +272,24 @@ git commit -m "Describe your changes here"
 
 **When to commit:** Commit whenever you finish a working unit of code, such as a
 bug fix, a completed method, or a working feature. A commit can include changes
-across multiple files.
+across multiple files. You can make multiple changes, stage them all, and then create one single commit.
 
-### Push changes to GitHub
+For example, if you edited the following files, stage them individually
+(these file names are examples):
+
+```sh
+git add login.java
+git add dashboard.java
+git add settings.java
+```
+
+Then commit everything together:
+
+```sh
+git commit -m "Added login, dashboard, and settings"
+```
+
+#### 3. Push changes to GitHub
 
 Upload your local commits to the shared repository:
 
@@ -270,6 +303,12 @@ Your changes are now uploaded to GitHub and available to the rest of the team.
 
 - **Stage and commit:** Whenever a specific task works and passes basic checks.
 - **Push:** At the end of your coding session, or sooner when teammates need your changes.
+
+Think of the process like packing a basket:
+
+- **`git add`:** Put changes into a basket.
+- **`git commit`:** Close the basket and save it as one package.
+- **`git push`:** Send that package to GitHub.
 
 #### Quick cheat sheet
 
@@ -315,7 +354,7 @@ To avoid conflicts and keep our project organized:
 
 > **Remember:** Everyone has their own local copy of the project. GitHub does not automatically synchronize files in real time.
 
-* `git push` uploads your changes.
-* `git pull` downloads and integrates other people’s changes.
+- `git push` uploads your changes.
+- `git pull` downloads and integrates other people’s changes.
 
 Happy coding!
