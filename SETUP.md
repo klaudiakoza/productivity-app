@@ -20,6 +20,8 @@ teammates' latest changes before you start working.
 - [Useful Git commands](#4-useful-git-commands)
 - [Important team guidelines](#5-important-team-guidelines)
 
+---
+
 ## 1. Prerequisites
 
 Before getting started, make sure you have:
@@ -81,6 +83,8 @@ See the [official Git installation instructions for macOS](https://git-scm.com/i
    ```
 
 Once a Git version number appears, continue with cloning the repository below.
+
+---
 
 ## 2. Clone the Repository
 
@@ -207,6 +211,8 @@ nothing to commit, working tree clean
 
 You’re ready to start developing!
 
+---
+
 ## 3. Everyday Git Commands
 
 > **Important:** Always synchronize your local repository before starting work.
@@ -219,55 +225,79 @@ Download the latest changes from GitHub:
 git pull origin main
 ```
 
+This command is very important as it ensures you are working on the code that's up to date.
+
 ### After making changes
 
 #### 1. Stage files
 
-After you create a new file or edit an existing one, stage your changes using
-`git add` followed by the file's path relative to the project root:
+**Option 1: Create a new file.**
+
+If you want to create a new file, you will do so using **File --> New...** in your IntelliJ IDEA menu.sh
+Then, in your built in IntelliJ IDEA terminal, stage your changes using
+`git add` followed by the file's name that you just created:
 
 ```sh
-git add path/to/file
+git add <file_name>
 ```
 
-For example, after editing `Main.java`:
+For example, if you just created a new class called `Task.java`:
 
 ```sh
-git add src/main/java/com/productivity/Main.java
+git add Task.java
 ```
 
-The same command works for a new or edited file, such as `Task.java`:
+**Option 2: Edit an existing file.**
+
+The same Git command is used when making changes in your files.
+For example, if you just finished coding in `Main.java`, you would type this in your Intelli terminal:
 
 ```sh
-git add src/main/java/com/productivity/model/Task.java
+git add Task.java
 ```
 
-Stage multiple specific files:
+> **Note:** You do not have to do `add` after every little change you make. Think of it as working on a unit of code, completing some tasks within a file.
+> You can also stage (apply changes) to multiple files you worked on.
+
+**Stage multiple specific files:**
 
 ```sh
-git add src/main/java/com/productivity/Main.java src/main/java/com/productivity/model/Task.java
+git add Main.java Task.java
 ```
 
-Stage all changes under the current directory, including new, modified, and deleted files:
+**Stage all changes at once:**
 
 ```sh
 git add .
 ```
 
-> **Important:** Add is case sensitive. Make sure to match the file name's capitalization when staging changes. For a file named `SETUP.md`, enter:
+This stages all new, modified, and deleted files within the current directory and its subdirectories.
+
+> **Tip:** If other files contain incomplete work, stage individual files instead of using `git add .`.
+> Staging individual files is generally recommended for a more organized work.
+
+> `add` is case sensitive. Make sure to match the file name's capitalization when staging changes. For a file named `SETUP.md`, enter:
 >
 > ```sh
 > git add SETUP.md
 > ```
 
-> **Tip:** If other files contain incomplete work, stage individual files instead of using `git add .`.
+> **Important:** You can run `git add` multiple times before creating a **commit**. You do not need a separate `git commit -m` for every file.
+> Once you've staged everything you want to include in GitHub, create one commit in the next step.
 
 #### 2. Commit changes locally
 
-Save your staged changes as a local commit:
+A commit saves your staged changes in Git.
+Once you made changes to your code, save them as a local commit:
 
 ```sh
 git commit -m "Describe your changes here"
+```
+
+For example, if you made changes to TaskRepository.java, your commit would look something like this:
+
+```sh
+git commit -m "Updated TaskRepository"
 ```
 
 **When to commit:** Commit whenever you finish a working unit of code, such as a
@@ -278,16 +308,18 @@ For example, if you edited the following files, stage them individually
 (these file names are examples):
 
 ```sh
-git add login.java
-git add dashboard.java
-git add settings.java
+git add Category.java
+git add Task.java
+git add User.java
 ```
 
 Then commit everything together:
 
 ```sh
-git commit -m "Added login, dashboard, and settings"
+git commit -m "Added categories, task list, and user info"
 ```
+
+You can stage multiple files individually and include all of them in a single commit.
 
 #### 3. Push changes to GitHub
 
@@ -327,6 +359,8 @@ To download their latest updates:
 git pull origin main
 ```
 
+---
+
 ## 4. Useful Git Commands
 
 | Command | Purpose |
@@ -339,6 +373,8 @@ git pull origin main
 | `git push origin main` | Upload commits to GitHub |
 | `git log --oneline` | View recent commits |
 | `git branch` | View local branches |
+
+---
 
 ## 5. Important Team Guidelines
 
