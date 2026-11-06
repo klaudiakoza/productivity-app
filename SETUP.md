@@ -1,6 +1,14 @@
-# Productivity App — Team Setup Guide
+# Productivity App — Setup Guide
 
-A collaborative productivity application developed by our team of three.
+Use this guide to set up your local project and work with the team through GitHub.
+
+## Contents
+
+- [Prerequisites](#1-prerequisites)
+- [Clone the repository](#2-clone-the-repository)
+- [Everyday Git commands](#3-everyday-git-commands)
+- [Useful Git commands](#4-useful-git-commands)
+- [Important team guidelines](#5-important-team-guidelines)
 
 ## 1. Prerequisites
 
@@ -10,6 +18,59 @@ Before getting started, make sure you have:
 * IntelliJ IDEA installed.
 * Access to our GitHub repository as a collaborator.
 * A GitHub account.
+
+### Check if Git is installed
+
+Open the built-in IntelliJ Terminal and run:
+
+```sh
+git --version
+```
+
+If Git is installed, you should see a version number, for example:
+
+```text
+git version 2.39.5
+```
+
+Your version number may be different.
+
+### If Git is not installed
+
+If the command is not recognized or prompts you to install developer tools,
+follow the instructions for your operating system below.
+
+#### macOS
+
+1. Open **Terminal** from **Applications → Utilities**, or use IntelliJ's built-in terminal.
+2. Run the following command to install Apple's Command Line Tools, which include Git:
+
+   ```sh
+   xcode-select --install
+   ```
+
+3. Follow the installation prompts and wait for installation to finish.
+4. Open a new terminal tab and verify the installation:
+
+   ```sh
+   git --version
+   ```
+
+See the [official Git installation instructions for macOS](https://git-scm.com/install/mac) for other installation options.
+
+#### Windows
+
+1. Open the [official Git for Windows download page](https://git-scm.com/install/windows) and download the installer for your computer.
+2. Run the installer and follow the setup prompts.
+3. When asked how Git should be used from the command line, choose **Git from the command line and also from 3rd-party software** so IntelliJ's terminal can find it. Keep the defaults for the other options unless you need a specific setting.
+4. After installation, close and reopen IntelliJ IDEA so it picks up the updated `PATH`.
+5. Open IntelliJ's built-in terminal and verify the installation:
+
+   ```sh
+   git --version
+   ```
+
+Once a Git version number appears, continue with cloning the repository below.
 
 ## 2. Clone the Repository
 
@@ -24,22 +85,23 @@ For example:
 **Windows:**
 
 ```text
-C:\Users\YourName\project
+C:\Users\YourName\School\CS1012FinalProject
 ```
 
 **macOS:**
 
 ```text
-/Users/YourName/project
+/Users/YourName/School/CS1012FinalProject
 ```
 
 > **Important:** The parent folder can have any name and be located anywhere on your computer. It does not have to match anyone else’s folder structure.
+> Make sure you copy the correct path.
 
 ### Step 2: Open IntelliJ IDEA
 
 1. Open IntelliJ IDEA.
 2. Select **Open**.
-3. Select the folder you just created (e.g., `project`).
+3. Select the folder you just created (e.g., `CS1012FinalProject`).
 4. Open the built-in **Terminal** at the bottom of IntelliJ.
 
 ### Step 3: Clone the repository
@@ -147,9 +209,76 @@ Download the latest changes from GitHub:
 git pull origin main
 ```
 
-### After making changes
+### After making changes: stage files
+
+After you create a new file or edit an existing one, stage your changes using
+`git add` followed by the file's path relative to the project root:
+
+```sh
+git add path/to/file
+```
+
+For example, after editing `Main.java`:
+
+```sh
+git add src/main/java/com/productivity/Main.java
+```
+
+The same command works for a new or edited file, such as `Task.java`:
+
+```sh
+git add src/main/java/com/productivity/model/Task.java
+```
+
+Stage multiple specific files:
+
+```sh
+git add src/main/java/com/productivity/Main.java src/main/java/com/productivity/model/Task.java
+```
+
+Stage all changes under the current directory, including new, modified, and deleted files:
+
+```sh
+git add .
+```
+
+> **Tip:** If other files contain incomplete work, stage individual files instead of using `git add .`.
+
+### Commit changes locally
+
+Save your staged changes as a local commit:
+
+```sh
+git commit -m "Describe your changes here"
+```
+
+**When to commit:** Commit whenever you finish a working unit of code, such as a
+bug fix, a completed method, or a working feature. A commit can include changes
+across multiple files.
+
+### Push changes to GitHub
+
+Upload your local commits to the shared repository:
+
+```sh
+git push origin main
+```
 
 Your changes are now uploaded to GitHub and available to the rest of the team.
+
+#### Suggested workflow
+
+- **Stage and commit:** Whenever a specific task works and passes basic checks.
+- **Push:** At the end of your coding session, or sooner when teammates need your changes.
+
+#### Quick cheat sheet
+
+| Command | When to use it | Purpose |
+| --- | --- | --- |
+| `git pull origin main` | Before starting work | Download and integrate the team's latest changes. |
+| `git add path/to/file` | When a change is ready to commit | Select the changes to include in your next commit. |
+| `git commit -m "message"` | After staging a working unit of code | Save a local commit with a meaningful message. |
+| `git push origin main` | When ready to share your commits | Upload your local commits to GitHub. |
 
 ### When another teammate pushes changes
 
