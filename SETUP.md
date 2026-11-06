@@ -227,6 +227,36 @@ git pull origin main
 ### Step 2: Create or edit your files
 
 Write your code in IntelliJ IDEA. To create a new file, use **File → New...**; to edit an existing file, open it in the editor. Save your changes before staging them.
+In Terminal, type:
+
+``` sh
+git add path/to/created-file
+```
+
+For example, if you created a new class in repository package and want to stage it, your Terminal command would look like this
+```sh
+git add src/main/java/com/productivity/repository/(Class_Name).java
+```
+
+#### Optional: Remove code or a file
+
+To remove part of a file, delete the unwanted code in IntelliJ and save the file. Stage it like any other edit in Step 3.
+
+To remove an entire file, right-click it in IntelliJ's Project panel and select **Delete**. Then stage the deletion using its original path:
+
+```sh
+git add path/to/deleted-file
+```
+
+Replace `path/to/deleted-file` with the file's actual path relative to the project folder.
+
+Alternatively, if the file is tracked by Git and you have not deleted it yet, this command deletes it and stages the removal in one step:
+
+```sh
+git rm path/to/file
+```
+
+Run `git status` to review the staged deletion, then follow Steps 4 and 5 to commit and push it. Teammates receive the removal when they pull your changes.
 
 ### Step 3: Stage your changes
 
@@ -265,6 +295,16 @@ git commit -m "Describe your changes here"
 ```
 
 Use a meaningful message, such as `"Updated TaskRepository"`. One commit can include all the files you staged for that unit of work; you do not need a separate commit for every file.
+
+For example, if you updated `Task.java` and `Category.java` in the `model` package and `TaskRepository.java` in the `repository` package, stage the related changes and commit them together:
+
+```sh
+git add src/main/java/com/productivity/model/Task.java
+git add src/main/java/com/productivity/model/Category.java
+git add src/main/java/com/productivity/repository/TaskRepository.java
+
+git commit -m "Added task management functionality"
+```
 
 ### Step 5: Push changes to GitHub
 
