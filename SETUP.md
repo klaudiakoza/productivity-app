@@ -4,6 +4,8 @@
 
 We will use **IntelliJ IDEA** to write, edit, and organize our application code, and its **built-in Terminal** to run Git commands. You do not need a separate Terminal application.
 
+**GitHub** stores our shared repository, where everyone can view and access the team's code. For this project, we will make all code changes locally in **IntelliJ IDEA**, rather than editing files on the GitHub website. We will use Git commands to upload our changes and download teammates' updates.
+
 This guide walks you through cloning the shared repository, then using Git to collaborate:
 
 - **Clone:** Download the entire project and connect your local folder to our GitHub repository.
@@ -217,7 +219,7 @@ nothing to commit, working tree clean
 
 You’re ready to start developing!
 
----
+
 
 ## 3. Everyday Git Commands
 
