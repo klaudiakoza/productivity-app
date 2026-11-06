@@ -27,8 +27,11 @@ Before getting started, make sure you have:
 
 - Git installed.
 - IntelliJ IDEA installed.
+- Java Development Kit (JDK) 26 installed, or downloaded through IntelliJ when opening the project (see Step 4 below).
 - Access to our GitHub repository as a collaborator.
 - A GitHub account.
+
+The project's `pom.xml` targets Java 26. Use JDK 26 as IntelliJ's Project SDK so you can compile and run the project.
 
 ### Check if Git is installed
 
@@ -133,7 +136,11 @@ Git will automatically create a folder called `productivity-app` inside your cur
 2. Navigate to your newly created `productivity-app` folder.
 3. Open the folder.
 4. If prompted, trust the project.
-5. Allow IntelliJ to import the Maven project from `pom.xml` and download dependencies.
+5. Open **File → Project Structure → Project Settings → Project** and select JDK 26 in the **SDK** field. If it is not installed, choose **Download JDK**, select version **26**, and complete the download.
+6. Click **Apply**, then **OK**.
+7. Allow IntelliJ to import the Maven project from `pom.xml` and download dependencies.
+
+See the [IntelliJ SDK configuration guide](https://www.jetbrains.com/help/idea/sdk.html) for more details.
 
 The project's source files are organized as follows:
 
@@ -218,7 +225,7 @@ Run these commands in IntelliJ's built-in Terminal from the `productivity-app` p
 
 ### Step 1: Pull the latest changes
 
-Before starting work, download and integrate the latest changes from GitHub:
+Before starting work, download and integrate the latest changes from GitHub. In the built-in Terminal, type:
 
 ```sh
 git pull origin main
@@ -226,17 +233,7 @@ git pull origin main
 
 ### Step 2: Create or edit your files
 
-Write your code in IntelliJ IDEA. To create a new file, use **File → New...**; to edit an existing file, open it in the editor. Save your changes before staging them.
-In Terminal, type:
-
-``` sh
-git add path/to/created-file
-```
-
-For example, if you created a new class in repository package and want to stage it, your Terminal command would look like this
-```sh
-git add src/main/java/com/productivity/repository/(Class_Name).java
-```
+To create a new file, use **File → New...** in IntelliJ IDEA. To edit an existing file, open it and write your code. Save your changes, then stage them in Step 3.
 
 #### Optional: Remove code or a file
 
