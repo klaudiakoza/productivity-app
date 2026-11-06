@@ -1,5 +1,21 @@
 # Productivity App — Setup Guide
 
+## How We Will Work on This Project
+
+We will use **IntelliJ IDEA** as our main development environment. This is where we will write, edit, and organize our application code.
+
+We will also use IntelliJ's **built-in Terminal** to run Git commands that synchronize our local project with our shared GitHub repository.
+
+You do not need to open a separate Terminal application. All Git commands can be executed directly inside IntelliJ IDEA.
+
+Our workflow will look like this:
+
+1. **IntelliJ IDEA:** Write and edit code, create files, and work on application features.
+2. **Built-in Terminal:** Use Git commands to stage, commit, pull, and push changes.
+3. **GitHub:** Share our code and synchronize changes between team members.
+
+**Important:** We will be coding normally in IntelliJ. The Terminal is simply where we communicate with Git to manage and share our changes.
+
 Use this guide to set up your local project and collaborate on the code by
 integrating GitHub with IntelliJ IDEA.
 
@@ -49,8 +65,8 @@ Your version number may be different.
 
 ### If Git is not installed
 
-If the command is not recognized or prompts you to install developer tools,
-follow the instructions for your operating system below.
+IntelliJ IDEA's built-in Terminal uses your computer's installed command-line tools. It does not include Git, so Git must be installed separately.
+If the git command is not recognized, follow the instructions for your operating system.
 
 #### macOS
 
