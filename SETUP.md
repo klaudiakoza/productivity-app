@@ -2,31 +2,14 @@
 
 ## How We Will Work on This Project
 
-We will use **IntelliJ IDEA** as our main development environment. This is where we will write, edit, and organize our application code.
+We will use **IntelliJ IDEA** to write, edit, and organize our application code, and its **built-in Terminal** to run Git commands. You do not need a separate Terminal application.
 
-We will also use IntelliJ's **built-in Terminal** to run Git commands that synchronize our local project with our shared GitHub repository.
+This guide walks you through cloning the shared repository, then using Git to collaborate:
 
-You do not need to open a separate Terminal application. All Git commands can be executed directly inside IntelliJ IDEA.
-
-Our workflow will look like this:
-
-1. **IntelliJ IDEA:** Write and edit code, create files, and work on application features.
-2. **Built-in Terminal:** Use Git commands to stage, commit, pull, and push changes.
-3. **GitHub:** Share our code and synchronize changes between team members.
-
-> **Important:** We will be coding normally in IntelliJ. The Terminal is simply where we communicate with Git to manage and share our changes.
-
-This guide will help you set up your local project and collaborate on the code by
-integrating GitHub with IntelliJ IDEA.
-
-You will **clone** the existing repository. Cloning automatically downloads the
-entire project onto your computer and connects the local folder to our shared
-GitHub repository.
-
-This guide also explains which terminal commands to use when you make changes:
-**stage** your files, **commit** your changes, and **push** them to GitHub so your
-teammates can see and download your updates. It also shows how to **pull** your
-teammates' latest changes before you start working.
+- **Clone:** Download the entire project and connect your local folder to our GitHub repository.
+- **Pull:** Download and integrate teammates' latest changes before starting work.
+- **Stage and commit:** Select your changes and save them locally in Git.
+- **Push:** Upload your commits to GitHub so teammates can download them.
 
 ## Contents
 
@@ -231,127 +214,67 @@ You’re ready to start developing!
 
 ## 3. Everyday Git Commands
 
-> **Important:** Always synchronize your local repository before starting work.
+Run these commands in IntelliJ's built-in Terminal from the `productivity-app` project folder. File paths below are relative to that folder.
 
-### Before making changes
+### Step 1: Pull the latest changes
 
-Download the latest changes from GitHub:
+Before starting work, download and integrate the latest changes from GitHub:
 
 ```sh
 git pull origin main
 ```
 
-This command is very important as it ensures you are working on the code that's up to date.
+### Step 2: Create or edit your files
 
-### After making changes
+Write your code in IntelliJ IDEA. To create a new file, use **File → New...**; to edit an existing file, open it in the editor. Save your changes before staging them.
 
-#### 1. Stage files
+### Step 3: Stage your changes
 
-**Option 1: Create a new file.**
-
-If you want to create a new file, you will do so using **File → New...** in your IntelliJ IDEA menu.
-Then, in your built in IntelliJ IDEA terminal, stage your changes using
-`git add` followed by the file's name that you just created:
+Staging selects the changes to include in your next commit. Use the same command for a new or edited file:
 
 ```sh
-git add <file_name>
+git add src/main/java/com/productivity/model/Task.java
 ```
 
-For example, if you just created a new class called `Task.java`, you write this in Intelli terminal:
+To stage multiple specific files, separate their paths with spaces, without commas:
 
 ```sh
-git add Task.java
+git add src/main/java/com/productivity/Main.java src/main/java/com/productivity/model/Task.java
 ```
 
-**Option 2: Edit an existing file.**
-
-The same Git command is used when making changes in your files.
-For example, if you just finished coding in `Main.java`, you would type this in terminal:
-
-```sh
-git add Task.java
-```
-
-> **Note:** You do not have to do `add` after every little change you make. Think of it as working on a unit of code, completing some tasks within a file.
-> You can also stage (apply changes) to multiple files you worked on.
-
-**Stage multiple specific files:**
-
-```sh
-git add Main.java Task.java
-```
-Yes, you read it right. There is no comma between the files.
-
-**Stage all changes at once:**
+Alternatively, stage all new, modified, and deleted files under the current directory:
 
 ```sh
 git add .
 ```
 
-This stages all new, modified, and deleted files within the current directory and its subdirectories.
+> **Tip:** Stage individual files if other files contain incomplete work. You can run `git add` multiple times before committing; you do not need to stage every small edit as you make it.
 
-> **Tip:** If other files contain incomplete work, stage individual files instead of using `git add .`.
-> Staging individual files is generally recommended for a more organized work.
+Match each file name's capitalization. For example, to stage this guide:
 
-> `add` is case sensitive. Make sure to match the file name's capitalization when staging changes. For a file named `SETUP.md`, enter:
->
-> ```sh
-> git add SETUP.md
-> ```
+```sh
+git add SETUP.md
+```
 
-> **Important:** You can run `git add` multiple times before creating a **commit**. You do not need a separate `git commit -m` for every file.
-> Once you've staged everything you want to include in GitHub, create one commit in the next step.
+### Step 4: Commit changes locally
 
-#### 2. Commit changes locally
-
-A commit saves your staged changes in Git.
-Once you made changes to your code, save them as a local commit:
+A commit saves your staged changes in Git. Commit when you finish a working unit of code that passes basic checks, such as a bug fix, a completed method, or a working feature.
 
 ```sh
 git commit -m "Describe your changes here"
 ```
 
-For example, if you made changes to TaskRepository.java, your commit would look something like this:
+Use a meaningful message, such as `"Updated TaskRepository"`. One commit can include all the files you staged for that unit of work; you do not need a separate commit for every file.
 
-```sh
-git commit -m "Updated TaskRepository"
-```
+### Step 5: Push changes to GitHub
 
-**When to commit:** Commit whenever you finish a working unit of code, such as a
-bug fix, a completed method, or a working feature. A commit can include changes
-across multiple files. You can make multiple changes, stage them all, and then create one single commit.
-
-For example, if you edited the following files, stage them individually
-(these file names are examples):
-
-```sh
-git add Category.java
-git add Task.java
-git add User.java
-```
-
-Then commit everything together:
-
-```sh
-git commit -m "Added categories, task list, and user info"
-```
-
-You can stage multiple files individually and include all of them in a single commit.
-
-#### 3. Push changes to GitHub
-
-Upload your local commits to the shared repository:
+Upload your local commits so teammates can download them:
 
 ```sh
 git push origin main
 ```
 
-Your changes are now uploaded to GitHub and available to the rest of the team.
-
-#### Suggested workflow
-
-- **Stage and commit:** Whenever a specific task works and passes basic checks.
-- **Push:** At the end of your coding session, or sooner when teammates need your changes.
+Push at the end of your coding session, or sooner when teammates need your changes.
 
 Think of the process like packing a basket:
 
@@ -359,37 +282,20 @@ Think of the process like packing a basket:
 - **`git commit`:** Close the basket and save it as one package.
 - **`git push`:** Send that package to GitHub.
 
-#### Quick cheat sheet
-
-| Command | When to use it | Purpose |
-| --- | --- | --- |
-| `git pull origin main` | Before starting work | Download and integrate the team's latest changes. |
-| `git add path/to/file` | When a change is ready to commit | Select the changes to include in your next commit. |
-| `git commit -m "message"` | After staging a working unit of code | Save a local commit with a meaningful message. |
-| `git push origin main` | When ready to share your commits | Upload your local commits to GitHub. |
-
-### When another teammate pushes changes
-
-To download their latest updates:
-
-```sh
-git pull origin main
-```
-
 ---
 
 ## 4. Useful Git Commands
 
-| Command | Purpose |
-| --- | --- |
-| `git status` | Check the current state of your files |
-| `git pull origin main` | Download and integrate the latest changes |
-| `git add .` | Stage new, modified, and deleted files under the current directory |
-| `git add filename` | Stage a specific file |
-| `git commit -m "message"` | Save a commit |
-| `git push origin main` | Upload commits to GitHub |
-| `git log --oneline` | View recent commits |
-| `git branch` | View local branches |
+| Command | When to use it | Purpose |
+| --- | --- | --- |
+| `git status` | Before staging or committing | Check the current state of your files. |
+| `git pull origin main` | Before starting work | Download and integrate the team's latest changes. |
+| `git add path/to/file` | When a change is ready to commit | Select a file's changes for your next commit. |
+| `git add .` | When all changes under the current directory are ready | Stage new, modified, and deleted files. |
+| `git commit -m "message"` | After staging a working unit of code | Save a local commit with a meaningful message. |
+| `git push origin main` | When ready to share your commits | Upload your local commits to GitHub. |
+| `git log --oneline` | When reviewing project history | View recent commits. |
+| `git branch` | When checking branches | View local branches. |
 
 ---
 
@@ -406,8 +312,5 @@ To avoid conflicts and keep our project organized:
 7. Do not commit passwords, API keys, or other sensitive information.
 
 > **Remember:** Everyone has their own local copy of the project. GitHub does not automatically synchronize files in real time.
-
-- `git push` uploads your changes.
-- `git pull` downloads and integrates other people’s changes.
 
 Happy coding!
