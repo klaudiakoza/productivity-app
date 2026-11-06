@@ -14,9 +14,9 @@ Our workflow will look like this:
 2. **Built-in Terminal:** Use Git commands to stage, commit, pull, and push changes.
 3. **GitHub:** Share our code and synchronize changes between team members.
 
-**Important:** We will be coding normally in IntelliJ. The Terminal is simply where we communicate with Git to manage and share our changes.
+> **Important:** We will be coding normally in IntelliJ. The Terminal is simply where we communicate with Git to manage and share our changes.
 
-Use this guide to set up your local project and collaborate on the code by
+This guide will help you set up your local project and collaborate on the code by
 integrating GitHub with IntelliJ IDEA.
 
 You will **clone** the existing repository. Cloning automatically downloads the
@@ -49,7 +49,7 @@ Before getting started, make sure you have:
 
 ### Check if Git is installed
 
-Open the built-in IntelliJ Terminal (located on the bottom left) and run:
+Open the built-in IntelliJ Terminal (usually located on the bottom left) and run:
 
 ```sh
 git --version
@@ -62,6 +62,7 @@ git version 2.39.5
 ```
 
 Your version number may be different.
+You can now skip to step 2, which is cloning the repository.
 
 ### If Git is not installed
 
@@ -125,12 +126,11 @@ C:\Users\YourName\School\CS1012FinalProject
 ```
 
 > **Important:** The parent folder can have any name and be located anywhere on your computer. It does not have to match anyone else’s folder structure.
-> Make sure you copy the correct path.
 
 ### Step 2: Open IntelliJ IDEA
 
 1. Open IntelliJ IDEA.
-2. Select **Open**.
+2. Select **File → Open**.
 3. Select the folder you just created (e.g., `CS1012FinalProject`).
 4. Open the built-in **Terminal** at the bottom of IntelliJ.
 
