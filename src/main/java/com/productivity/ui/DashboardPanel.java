@@ -128,9 +128,9 @@ public class DashboardPanel extends VBox {
 
         // create task checkboxes
         // !NOTE: THESE ARE JUST PLACEHOLDERS!
-        CheckBox task1 = new CheckBox("• Finish Java assignment");
-        CheckBox task2 = new CheckBox("• Study for CS 2013 exam");
-        CheckBox task3 = new CheckBox("• Review cybersecurity presentation");
+        CheckBox task1 = new CheckBox("Finish Java assignment");
+        CheckBox task2 = new CheckBox("Study for CS 2013 exam");
+        CheckBox task3 = new CheckBox("Review cybersecurity presentation");
 
         // style checkboxes
         String taskStyle =

@@ -20,10 +20,14 @@ public class MainFrame extends Application {
         DashboardPanel dashboard = new DashboardPanel();
         root.setCenter(dashboard);
 
+        // create sidebar on the left side
+        SidebarPanel sidebar = new SidebarPanel();
+        root.setLeft(sidebar);
+
         // window size
         Scene scene = new Scene(root, 900, 600);
 
-        stage.setTitle("Productivity App");
+        stage.setTitle("Better Tasks: Your Productivity Tool");
         stage.setScene(scene);
         stage.show();
     }
