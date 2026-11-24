@@ -1,0 +1,70 @@
+
+/* ENTIRE APPLICATION */
+.root {
+    -fx-background-color: #DCEEFF;
+    -fx-font-family: "Segoe UI";
+}
+
+/* SIDEBAR */
+.sidebar {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 20px;
+}
+
+/* SECTION HEADINGS */
+.heading {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #25283D;
+}
+
+/* REGULAR TEXT */
+.label {
+    -fx-text-fill: #555B70;
+}
+
+/* SUMMARY CARDS */
+.summary-card {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12px;
+    -fx-padding: 18px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 8, 0, 0, 2);
+}
+
+/* BUTTONS */
+.button {
+    -fx-background-color: #7768D8;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-padding: 9px 16px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #6353C5;
+}
+
+/* TEXT FIELDS */
+.text-field {
+    -fx-background-color: white;
+    -fx-background-radius: 7px;
+    -fx-border-color: #E1E3EB;
+    -fx-border-radius: 7px;
+    -fx-padding: 9px;
+}
+
+/* LISTS */
+.list-view {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-color: transparent;
+}
+
+.content-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-border-color: #EAEAEA;
+    -fx-border-radius: 12px;
+    -fx-padding: 20px;
+}
+

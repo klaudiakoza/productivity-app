@@ -32,7 +32,7 @@ public class SidebarPanel extends VBox {
 
         // add logo
         Image logoImage = new Image(
-                getClass().getResourceAsStream("/images/BetterTasks.png")
+                getClass().getResourceAsStream("/images/tasks.png")
         );
 
         ImageView logo = new ImageView(logoImage);
@@ -61,57 +61,24 @@ public class SidebarPanel extends VBox {
                         "-fx-background-radius: 6;" +
                         "-fx-cursor: hand;";
 
-        tasksButton.setOnMouseEntered(e ->
-                tasksButton.setStyle(buttonStyle + "-fx-background-color: #EEEEEE;")
-        );
-
-        tasksButton.setOnMouseExited(e ->
-                tasksButton.setStyle(buttonStyle)
-        );
-
-        calendarButton.setOnMouseEntered(e ->
-                calendarButton.setStyle(buttonStyle + "-fx-background-color: #EEEEEE;")
-        );
-
-        calendarButton.setOnMouseExited(e ->
-                calendarButton.setStyle(buttonStyle)
-        );
-
-        categoriesButton.setOnMouseEntered(e ->
-                categoriesButton.setStyle(buttonStyle + "-fx-background-color: #EEEEEE;")
-        );
-
-        categoriesButton.setOnMouseExited(e ->
-                categoriesButton.setStyle(buttonStyle)
-        );
-
-        settingsButton.setOnMouseEntered(e ->
-                settingsButton.setStyle(buttonStyle + "-fx-background-color: #EEEEEE;")
-        );
-
-        settingsButton.setOnMouseExited(e ->
-                settingsButton.setStyle(buttonStyle)
-        );
-
-    // apply regular style
+        // apply regular style
+        dashboardButton.setStyle(buttonStyle);
         tasksButton.setStyle(buttonStyle);
         categoriesButton.setStyle(buttonStyle);
         calendarButton.setStyle(buttonStyle);
         settingsButton.setStyle(buttonStyle);
 
-        // highlight the active page
-        dashboardButton.setStyle(
-                "-fx-background-color: #EAEAEA;" +
-                        "-fx-text-fill: #222222;" +
-                        "-fx-font-size: 13px;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-alignment: CENTER_LEFT;" +
-                        "-fx-padding: 10 12;" +
-                        "-fx-background-radius: 6;" +
-                        "-fx-cursor: hand;"
-        );
+        // Apply hover colors and restore each button's original style on exit.
+        for (Button button : new Button[]{dashboardButton, tasksButton,
+                categoriesButton, calendarButton, settingsButton}) {
+            String normalStyle = button.getStyle();
+            button.setOnMouseEntered(e -> button.setStyle(normalStyle
+                    + "-fx-background-color: #153A63;"
+                    + "-fx-text-fill: white;"));
+            button.setOnMouseExited(e -> button.setStyle(normalStyle));
+        }
 
-// Make buttons fill the sidebar width
+        // Make buttons fill the sidebar width
         dashboardButton.setMaxWidth(Double.MAX_VALUE);
         tasksButton.setMaxWidth(Double.MAX_VALUE);
         categoriesButton.setMaxWidth(Double.MAX_VALUE);

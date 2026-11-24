@@ -14,10 +14,7 @@ import java.util.Random;
 public class DashboardPanel extends VBox {
     private ArrayList<String> messages = new ArrayList<>();
 
-    private final Runnable openTaskPanel;
-
-    public DashboardPanel(Runnable openTaskPanel) {
-        this.openTaskPanel = openTaskPanel;
+    public DashboardPanel() {
         // set dashboard layout
         setSpacing(25);
         setPadding(new Insets(35));
@@ -125,20 +122,11 @@ public class DashboardPanel extends VBox {
         todayTasksSection.setPadding(new Insets(20));
         todayTasksSection.setPrefWidth(400);
 
-        todayTasksSection.setStyle(
-                "-fx-background-color: white;" +
-                        "-fx-background-radius: 12;" +
-                        "-fx-border-color: #EAEAEA;" +
-                        "-fx-border-radius: 12;"
-        );
+        todayTasksSection.getStyleClass().add("content-card");
 
         // Section heading
         Label todayHeading = new Label("Today's Tasks");
-        todayHeading.setStyle(
-                "-fx-font-size: 16px;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-text-fill: #222222;"
-        );
+        todayHeading.getStyleClass().add("heading");
 
         todayTasksSection.getChildren().add(todayHeading);
 
