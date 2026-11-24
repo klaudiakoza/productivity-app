@@ -13,7 +13,11 @@ import java.util.Random;
 
 public class DashboardPanel extends VBox {
     private ArrayList<String> messages = new ArrayList<>();
-    public DashboardPanel() {
+
+    private final Runnable openTaskPanel;
+
+    public DashboardPanel(Runnable openTaskPanel) {
+        this.openTaskPanel = openTaskPanel;
         // set dashboard layout
         setSpacing(25);
         setPadding(new Insets(35));
@@ -31,6 +35,7 @@ public class DashboardPanel extends VBox {
         messages.add("Hello! Ready to make today count?");
         messages.add("Small steps lead to big achievements.");
         messages.add("You've got this! Let's get things done.");
+        messages.add("Because sometimes all you need is a deadline.");
 
         // create a Random object to generate a random index
         Random random = new Random();
@@ -116,33 +121,46 @@ public class DashboardPanel extends VBox {
 
         // TODAY'S TASKS SECTION
         VBox todayTasksSection = new VBox();
-        todayTasksSection.setSpacing(10);
+        todayTasksSection.setSpacing(15);
+        todayTasksSection.setPadding(new Insets(20));
+        todayTasksSection.setPrefWidth(400);
 
+        todayTasksSection.setStyle(
+                "-fx-background-color: white;" +
+                        "-fx-background-radius: 12;" +
+                        "-fx-border-color: #EAEAEA;" +
+                        "-fx-border-radius: 12;"
+        );
+
+        // Section heading
         Label todayHeading = new Label("Today's Tasks");
         todayHeading.setStyle(
                 "-fx-font-size: 16px;" +
                         "-fx-font-weight: bold;" +
                         "-fx-text-fill: #222222;"
         );
+
         todayTasksSection.getChildren().add(todayHeading);
 
-        // create task checkboxes
-        // !NOTE: THESE ARE JUST PLACEHOLDERS!
+        // Placeholder tasks
         CheckBox task1 = new CheckBox("Finish Java assignment");
         CheckBox task2 = new CheckBox("Study for CS 2013 exam");
         CheckBox task3 = new CheckBox("Review cybersecurity presentation");
 
-        // style checkboxes
+        // Style checkboxes
         String taskStyle =
                 "-fx-font-size: 13px;" +
-                        "-fx-text-fill: #333333;";
+                        "-fx-text-fill: #444444;";
 
         task1.setStyle(taskStyle);
         task2.setStyle(taskStyle);
         task3.setStyle(taskStyle);
 
-        // add tasks to today's section
-        todayTasksSection.getChildren().addAll(task1, task2, task3);
+        // Add tasks
+        todayTasksSection.getChildren().addAll(
+                task1, task2, task3
+        );
+
         getChildren().add(todayTasksSection);
 
         // UPCOMING DEADLINES SECTION
@@ -172,26 +190,80 @@ public class DashboardPanel extends VBox {
 
         getChildren().add(upcomingDeadlinesSection);
 
+
         // QUICK ACTIONS SECTION
-        VBox quickActionsSection = new VBox();
-        quickActionsSection.setSpacing(10);
+        VBox quickActionsSection = new VBox(15);
+
         Label quickActionsHeading = new Label("Quick Actions");
         quickActionsHeading.setStyle(
-                "-fx-font-size: 16px;" +
+                "-fx-font-size: 18px;" +
                         "-fx-font-weight: bold;" +
                         "-fx-text-fill: #222222;"
         );
 
-        // create buttons
-        Button addTaskButton = new Button("+ Add New Task");
-        Button viewTasksButton = new Button("View All Tasks");
+        // Create action cards
+        HBox actionCards = new HBox(15);
 
-        // add heading and buttons to section
+        VBox addTaskCard = createActionCard(
+                "+",
+                "Add New Task",
+                "Create a new task",
+                "#F1EEFF",
+                "#6855C8"
+        );
+
+        addTaskCard.setOnMouseEntered(e ->
+                addTaskCard.setStyle(
+                        "-fx-background-color: #E8E3FA;" +
+                                "-fx-cursor: hand;"
+                )
+        );
+
+        addTaskCard.setOnMouseExited(e ->
+                addTaskCard.setStyle(
+                        "-fx-background-color: white;"
+                )
+        );
+
+        VBox viewTasksCard = createActionCard(
+                "☷",
+                "View All Tasks",
+                "Manage your tasks",
+                "#EAF3FF",
+                "#3976BA"
+        );
+
+        actionCards.getChildren().addAll(
+                addTaskCard,
+                viewTasksCard
+        );
+
         quickActionsSection.getChildren().addAll(
                 quickActionsHeading,
-                addTaskButton,
-                viewTasksButton
+                actionCards
         );
+
         getChildren().add(quickActionsSection);
+    }
+
+    private VBox createActionCard(String icon, String title,
+                                  String description,
+                                  String backgroundColor,
+                                  String textColor) {
+        Label iconLabel = new Label(icon);
+        iconLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: " + textColor + ";");
+
+        Label titleLabel = new Label(title);
+        titleLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: " + textColor + ";");
+
+        Label descriptionLabel = new Label(description);
+
+        VBox card = new VBox(8, iconLabel, titleLabel, descriptionLabel);
+        card.setPadding(new Insets(20));
+        card.setPrefWidth(220);
+        card.setStyle("-fx-background-color: " + backgroundColor + ";"
+                + "-fx-background-radius: 8;");
+
+        return card;
     }
 }

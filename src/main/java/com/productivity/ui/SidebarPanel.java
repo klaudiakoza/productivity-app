@@ -14,7 +14,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
 public class SidebarPanel extends VBox {
-    public SidebarPanel() {
+    public SidebarPanel(Runnable openTaskPanel, Runnable openDashboard) {
 
         // sidebar layout
         setSpacing(15);
@@ -45,7 +45,9 @@ public class SidebarPanel extends VBox {
 
         // navigation buttons
         Button dashboardButton = new Button("Dashboard");
+        dashboardButton.setOnAction(e -> openDashboard.run());
         Button tasksButton = new Button("My Tasks");
+        tasksButton.setOnAction(e -> openTaskPanel.run());
         Button categoriesButton = new Button("Categories");
         Button calendarButton = new Button("Calendar");
         Button settingsButton = new Button("Settings");
@@ -105,7 +107,8 @@ public class SidebarPanel extends VBox {
                         "-fx-font-weight: bold;" +
                         "-fx-alignment: CENTER_LEFT;" +
                         "-fx-padding: 10 12;" +
-                        "-fx-background-radius: 6;"
+                        "-fx-background-radius: 6;" +
+                        "-fx-cursor: hand;"
         );
 
 // Make buttons fill the sidebar width

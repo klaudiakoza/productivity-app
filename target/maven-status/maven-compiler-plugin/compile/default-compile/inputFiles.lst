@@ -5,6 +5,7 @@
 /Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/repository/TaskRepository.java
 /Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/service/TaskService.java
 /Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/service/TaskValidationService.java
+/Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/ui/AddNewTaskPanel.java
 /Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/ui/DashboardPanel.java
 /Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/ui/MainFrame.java
 /Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/ui/SidebarPanel.java

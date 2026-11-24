@@ -17,15 +17,19 @@ public class MainFrame extends Application {
         BorderPane root = new BorderPane();
 
         // create a dashboard in the center
-        DashboardPanel dashboard = new DashboardPanel();
-        root.setCenter(dashboard);
+        DashboardPanel dashboard = new DashboardPanel(() -> {
+            root.setCenter(new TaskPanel());
+        });
 
+        root.setCenter(dashboard);
         // create sidebar on the left side
-        SidebarPanel sidebar = new SidebarPanel();
+        SidebarPanel sidebar = new SidebarPanel(() -> {
+            root.setCenter(new TaskPanel());
+        }, () -> root.setCenter(dashboard));
         root.setLeft(sidebar);
 
         // window size
-        Scene scene = new Scene(root, 900, 600);
+        Scene scene = new Scene(root, 900, 800);
 
         stage.setTitle("Better Tasks: Your Productivity Tool");
         stage.setScene(scene);
