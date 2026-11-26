@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Random;
 
+import java.time.LocalDate;
+
 public class DashboardPanel extends VBox {
     private ArrayList<String> messages = new ArrayList<>();
 
@@ -22,6 +24,8 @@ public class DashboardPanel extends VBox {
     private Label totalNumber;
     private Label pendingNumber;
     private Label completedNumber;
+    private VBox todayTasksSection;
+    private VBox upcomingDeadlinesSection;
 
     public DashboardPanel(TaskRepository taskRepository, Runnable openTaskPanel) {
         this.taskRepository = taskRepository;
@@ -128,66 +132,17 @@ public class DashboardPanel extends VBox {
         getChildren().add(summaryBox);
 
         // TODAY'S TASKS SECTION
-        VBox todayTasksSection = new VBox();
-        todayTasksSection.setSpacing(15);
+        todayTasksSection = new VBox(15);
         todayTasksSection.setPadding(new Insets(20));
-        todayTasksSection.setPrefWidth(400);
-
         todayTasksSection.getStyleClass().add("content-card");
 
-        // Section heading
-        Label todayHeading = new Label("Today's Tasks");
-        todayHeading.getStyleClass().add("heading");
-
-        todayTasksSection.getChildren().add(todayHeading);
-
-        // Placeholder tasks
-        CheckBox task1 = new CheckBox("Finish Java assignment");
-        CheckBox task2 = new CheckBox("Study for CS 2013 exam");
-        CheckBox task3 = new CheckBox("Review cybersecurity presentation");
-
-        // Style checkboxes
-        String taskStyle =
-                "-fx-font-size: 13px;" +
-                        "-fx-text-fill: #444444;";
-
-        task1.setStyle(taskStyle);
-        task2.setStyle(taskStyle);
-        task3.setStyle(taskStyle);
-
-        // Add tasks
-        todayTasksSection.getChildren().addAll(
-                task1, task2, task3
-        );
-
-        getChildren().add(todayTasksSection);
 
         // UPCOMING DEADLINES SECTION
-        VBox upcomingDeadlinesSection = new VBox();
-        upcomingDeadlinesSection.setSpacing(10);
-        Label deadlinesHeading = new Label("Upcoming Deadlines");
-        deadlinesHeading.setStyle(
-                "-fx-font-size: 16px;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-text-fill: #222222;"
-        );
-        upcomingDeadlinesSection.getChildren().add(deadlinesHeading);
+        upcomingDeadlinesSection = new VBox(10);
+        upcomingDeadlinesSection.setPadding(new Insets(20));
+        upcomingDeadlinesSection.getStyleClass().add("content-card");
 
-
-        // create example deadline previews
-        // !NOTE: THESE ARE JUST PLACEHOLDERS!
-        Label deadline1 = new Label("• Java Assignment - November 18");
-        Label deadline2 = new Label("• Database Project - November 21");
-        Label deadline3 = new Label("• Cybersecurity Presentation - December 7");
-
-        // add deadlines to section
-        upcomingDeadlinesSection.getChildren().addAll(
-                deadline1,
-                deadline2,
-                deadline3
-        );
-
-        getChildren().add(upcomingDeadlinesSection);
+        getChildren().addAll(todayTasksSection, upcomingDeadlinesSection);
 
 
         // QUICK ACTIONS SECTION
@@ -283,6 +238,48 @@ public class DashboardPanel extends VBox {
         totalNumber.setText(String.valueOf(total));
         pendingNumber.setText(String.valueOf(total - completed));
         completedNumber.setText(String.valueOf(completed));
+        updateTaskSections();
+    }
+
+    private void updateTaskSections() {
+        Label todayHeading = new Label("Today's Tasks");
+        todayHeading.getStyleClass().add("heading");
+        todayTasksSection.getChildren().setAll(todayHeading);
+
+        Label deadlinesHeading = new Label("Upcoming Deadlines");
+        deadlinesHeading.getStyleClass().add("heading");
+        upcomingDeadlinesSection.getChildren().setAll(deadlinesHeading);
+
+        LocalDate today = LocalDate.now();
+
+        for (Task task : taskRepository.getAllTasks()) {
+            LocalDate dueDate = task.getDueDate();
+            if (dueDate == null) {
+                continue;
+            }
+
+            if (dueDate.equals(today)) {
+                CheckBox taskBox = new CheckBox(task.getTitle());
+                taskBox.setSelected(task.isCompleted());
+                taskBox.setWrapText(true);
+                taskBox.setOnAction(e -> {
+                    task.setCompleted(taskBox.isSelected());
+                    updateCounters();
+                });
+                todayTasksSection.getChildren().add(taskBox);
+            } else if (dueDate.isAfter(today) && !task.isCompleted()) {
+                Label deadline = new Label(task.getTitle() + " — Due: " + dueDate);
+                deadline.setWrapText(true);
+                upcomingDeadlinesSection.getChildren().add(deadline);
+            }
+        }
+
+        if (todayTasksSection.getChildren().size() == 1) {
+            todayTasksSection.getChildren().add(new Label("No tasks due today."));
+        }
+        if (upcomingDeadlinesSection.getChildren().size() == 1) {
+            upcomingDeadlinesSection.getChildren().add(new Label("No upcoming deadlines."));
+        }
     }
 
     private VBox createActionCard(String icon, String title,
