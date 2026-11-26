@@ -28,7 +28,15 @@
     -fx-background-color: #FFFFFF;
     -fx-background-radius: 12px;
     -fx-padding: 18px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 8, 0, 0, 2);
+}
+
+/* SOFT BLUE-GRAY CARD SHADOWS */
+.summary-card, .content-card, .card-shadow {
+    -fx-effect: dropshadow(gaussian, rgba(30, 55, 80, 0.14), 14, 0.08, 0, 4);
+}
+
+.action-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(30, 55, 80, 0.22), 18, 0.10, 0, 6);
 }
 
 /* BUTTONS */
@@ -66,5 +74,11 @@
     -fx-border-color: #EAEAEA;
     -fx-border-radius: 12px;
     -fx-padding: 20px;
+}
+
+.add-task-card {
+    -fx-border-color: #123B5A;
+    -fx-border-width: 2px;
+    -fx-border-radius: 8px;
 }
 

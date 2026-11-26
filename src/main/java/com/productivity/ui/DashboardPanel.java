@@ -12,14 +12,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class DashboardPanel extends VBox {
-    private ArrayList<String> messages = new ArrayList<>();
-
     private TaskRepository taskRepository;
     private Label totalNumber;
     private Label pendingNumber;
@@ -37,37 +34,24 @@ public class DashboardPanel extends VBox {
 
         Label heading = new Label("My Dashboard");
         heading.setStyle(
-                "-fx-font-family: 'Arial';" +
+                "-fx-font-family: 'Plus Jakarta Sans';" +
                         "-fx-font-size: 28px; " +
                         "-fx-font-weight: bold;" +
                         "-fx-text-fill: #222222;"
         );
 
-        // welcome messages options:
-        messages.add("Hello! Ready to make today count?");
-        messages.add("Small steps lead to big achievements.");
-        messages.add("You've got this! Let's get things done.");
-        messages.add("Because sometimes all you need is a deadline.");
-
-        // create a Random object to generate a random index
-        Random random = new Random();
-
-        // generate a random index within the range of available messages
-        int index = random.nextInt(messages.size());
-
-        // retrieve the message at the randomly selected index
-        String selectedMessage = messages.get(index);
-
-        // create a label displaying the selected welcome message
-        Label welcomeLabel = new Label(selectedMessage);
-        welcomeLabel.setStyle(
+        // Display today's date below the heading.
+        String todayDate = LocalDate.now().format(
+                DateTimeFormatter.ofPattern("EEEE, MMMM d, yyyy", Locale.ENGLISH)
+        );
+        Label dateLabel = new Label(todayDate);
+        dateLabel.setStyle(
                 "-fx-font-size: 18px;" +
                         "-fx-text-fill: #888888;"
         );
 
-        // apply the welcome label to the VBox
         getChildren().add(heading);
-        getChildren().add(welcomeLabel);
+        getChildren().add(dateLabel);
 
 
         //SUMMARY CARDS SECTION
@@ -83,6 +67,7 @@ public class DashboardPanel extends VBox {
         totalNumber.setMinWidth(60);
         Label totalTitle = new Label("Total Tasks");
         VBox totalCard = new VBox(totalNumber, totalTitle);
+        totalCard.getStyleClass().add("card-shadow");
         totalCard.setPadding(new Insets(20));
         totalCard.setSpacing(8);
         totalCard.setPrefWidth(180);
@@ -99,6 +84,7 @@ public class DashboardPanel extends VBox {
         pendingNumber.setMinWidth(60);
         Label pendingTitle = new Label("Pending");
         VBox pendingCard = new VBox(pendingNumber, pendingTitle);
+        pendingCard.getStyleClass().add("card-shadow");
         pendingCard.setPadding(new Insets(20));
         pendingCard.setSpacing(8);
         pendingCard.setPrefWidth(180);
@@ -115,6 +101,7 @@ public class DashboardPanel extends VBox {
         completedNumber.setMinWidth(60);
         Label completedTitle = new Label("Completed");
         VBox completedCard = new VBox(completedNumber, completedTitle);
+        completedCard.getStyleClass().add("card-shadow");
         completedCard.setPadding(new Insets(20));
         completedCard.setSpacing(8);
         completedCard.setPrefWidth(180);
@@ -161,10 +148,10 @@ public class DashboardPanel extends VBox {
         VBox addTaskCard = createActionCard(
                 "+",
                 "Add New Task",
-                "Create a new task",
-                "#F1EEFF",
-                "#6855C8"
+                "#326C95",
+                "#FFFFFF"
         );
+        addTaskCard.getStyleClass().add("add-task-card");
         // Open New Task window when clicked
         addTaskCard.setOnMouseClicked(event -> {
             AddNewTaskPanel newTaskPanel =
@@ -178,14 +165,14 @@ public class DashboardPanel extends VBox {
         });
 
         addTaskCard.setStyle(
-                "-fx-background-color: #F1EEFF;" +
+                "-fx-background-color: #326C95;" +
                         "-fx-background-radius: 8;" +
                         "-fx-cursor: hand;"
         );
 
         addTaskCard.setOnMouseEntered(e ->
                 addTaskCard.setStyle(
-                        "-fx-background-color: #E8E3FA;" +
+                        "-fx-background-color: #285A7E;" +
                                 "-fx-background-radius: 8;" +
                                 "-fx-cursor: hand;"
                 )
@@ -193,7 +180,7 @@ public class DashboardPanel extends VBox {
 
         addTaskCard.setOnMouseExited(e ->
                 addTaskCard.setStyle(
-                        "-fx-background-color: #F1EEFF;" +
+                        "-fx-background-color: #326C95;" +
                                 "-fx-background-radius: 8;" +
                                 "-fx-cursor: hand;"
                 )
@@ -201,8 +188,7 @@ public class DashboardPanel extends VBox {
 
         VBox viewTasksCard = createActionCard(
                 "☷",
-                "View All Tasks",
-                "Manage your tasks",
+                "Manage Your Tasks",
                 "#EAF3FF",
                 "#3976BA"
         );
@@ -283,7 +269,6 @@ public class DashboardPanel extends VBox {
     }
 
     private VBox createActionCard(String icon, String title,
-                                  String description,
                                   String backgroundColor,
                                   String textColor) {
         Label iconLabel = new Label(icon);
@@ -292,9 +277,8 @@ public class DashboardPanel extends VBox {
         Label titleLabel = new Label(title);
         titleLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: " + textColor + ";");
 
-        Label descriptionLabel = new Label(description);
-
-        VBox card = new VBox(8, iconLabel, titleLabel, descriptionLabel);
+        VBox card = new VBox(8, iconLabel, titleLabel);
+        card.getStyleClass().addAll("card-shadow", "action-card");
         card.setPadding(new Insets(20));
         card.setPrefWidth(220);
         card.setStyle("-fx-background-color: " + backgroundColor + ";"
