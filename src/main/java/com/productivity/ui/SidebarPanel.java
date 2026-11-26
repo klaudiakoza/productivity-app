@@ -36,8 +36,8 @@ public class SidebarPanel extends VBox {
         );
 
         ImageView logo = new ImageView(logoImage);
-        logo.setFitWidth(50);
-        logo.setFitHeight(50);
+        logo.setFitWidth(65);
+        logo.setFitHeight(65);
         logo.setPreserveRatio(true);
         HBox branding = new HBox(10);
         branding.setAlignment(Pos.CENTER_LEFT);

@@ -1,2 +1,3 @@
 com/productivity/ui/AddNewTaskPanel.class
+com/productivity/repository/CategoryRepository.class
 com/productivity/ui/SidebarPanel.class

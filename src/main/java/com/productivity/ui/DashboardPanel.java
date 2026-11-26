@@ -1,12 +1,16 @@
 package com.productivity.ui;
 
+import com.productivity.repository.TaskRepository;
+import com.productivity.model.Task;
+
 import javafx.scene.control.Label;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,7 +18,14 @@ import java.util.Random;
 public class DashboardPanel extends VBox {
     private ArrayList<String> messages = new ArrayList<>();
 
-    public DashboardPanel() {
+    private TaskRepository taskRepository;
+    private Label totalNumber;
+    private Label pendingNumber;
+    private Label completedNumber;
+
+    public DashboardPanel(TaskRepository taskRepository, Runnable openTaskPanel) {
+        this.taskRepository = taskRepository;
+
         // set dashboard layout
         setSpacing(25);
         setPadding(new Insets(35));
@@ -60,7 +71,7 @@ public class DashboardPanel extends VBox {
         HBox summaryBox = new HBox();
         summaryBox.setSpacing(15);
 
-        Label totalNumber = new Label("0");
+        totalNumber = new Label("0");
         totalNumber.setStyle(
                 "-fx-font-family: 'Arial';" +
                 "-fx-font-size: 28px; " +
@@ -76,7 +87,7 @@ public class DashboardPanel extends VBox {
                         "-fx-background-radius: 8;"
         );
 
-        Label pendingNumber = new Label("0");
+        pendingNumber = new Label("0");
         pendingNumber.setStyle(
                 "-fx-font-family: 'Arial';" +
                 "-fx-font-size: 28px; " +
@@ -92,7 +103,7 @@ public class DashboardPanel extends VBox {
                         "-fx-background-radius: 8;"
         );
 
-        Label completedNumber = new Label("0");
+        completedNumber = new Label("0");
         completedNumber.setStyle(
                 "-fx-font-family: 'Arial';" +
                 "-fx-font-size: 28px;" +
@@ -199,17 +210,37 @@ public class DashboardPanel extends VBox {
                 "#F1EEFF",
                 "#6855C8"
         );
+        // Open New Task window when clicked
+        addTaskCard.setOnMouseClicked(event -> {
+            AddNewTaskPanel newTaskPanel =
+                    new AddNewTaskPanel(taskRepository);
+
+            Stage taskStage = new Stage();
+            taskStage.setTitle("Add New Task");
+            taskStage.setScene(new Scene(newTaskPanel, 450, 500));
+            taskStage.setOnHidden(e -> updateCounters());
+            taskStage.show();
+        });
+
+        addTaskCard.setStyle(
+                "-fx-background-color: #F1EEFF;" +
+                        "-fx-background-radius: 8;" +
+                        "-fx-cursor: hand;"
+        );
 
         addTaskCard.setOnMouseEntered(e ->
                 addTaskCard.setStyle(
                         "-fx-background-color: #E8E3FA;" +
+                                "-fx-background-radius: 8;" +
                                 "-fx-cursor: hand;"
                 )
         );
 
         addTaskCard.setOnMouseExited(e ->
                 addTaskCard.setStyle(
-                        "-fx-background-color: white;"
+                        "-fx-background-color: #F1EEFF;" +
+                                "-fx-background-radius: 8;" +
+                                "-fx-cursor: hand;"
                 )
         );
 
@@ -219,6 +250,11 @@ public class DashboardPanel extends VBox {
                 "Manage your tasks",
                 "#EAF3FF",
                 "#3976BA"
+        );
+
+        viewTasksCard.setOnMouseClicked(e -> openTaskPanel.run());
+        viewTasksCard.setStyle(
+                viewTasksCard.getStyle() + "-fx-cursor: hand;"
         );
 
         actionCards.getChildren().addAll(
@@ -232,6 +268,21 @@ public class DashboardPanel extends VBox {
         );
 
         getChildren().add(quickActionsSection);
+        updateCounters();
+    }
+    public void updateCounters() {
+        int total = taskRepository.getAllTasks().size();
+        int completed = 0;
+
+        for (Task task : taskRepository.getAllTasks()) {
+            if (task.isCompleted()) {
+                completed++;
+            }
+        }
+
+        totalNumber.setText(String.valueOf(total));
+        pendingNumber.setText(String.valueOf(total - completed));
+        completedNumber.setText(String.valueOf(completed));
     }
 
     private VBox createActionCard(String icon, String title,

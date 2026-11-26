@@ -2,6 +2,7 @@
 /Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/model/Category.java
 /Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/model/Task.java
 /Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/model/User.java
+/Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/repository/CategoryRepository.java
 /Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/repository/TaskRepository.java
 /Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/service/TaskService.java
 /Users/klaudiakoza/CAL STATE LA/CS 1012/productivity-app/src/main/java/com/productivity/service/TaskValidationService.java

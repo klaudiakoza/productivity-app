@@ -10,20 +10,31 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import com.productivity.repository.TaskRepository;
+import com.productivity.ui.DashboardPanel;
 
 public class MainFrame extends Application {
     public void start(Stage stage) {
 
         BorderPane root = new BorderPane();
 
+        // create shared repository
+        TaskRepository taskRepository = new TaskRepository();
+
         // create a dashboard in the center
-        DashboardPanel dashboard = new DashboardPanel();
+        DashboardPanel dashboard = new DashboardPanel(
+                taskRepository,
+                () -> root.setCenter(new TaskPanel(taskRepository))
+        );
 
         root.setCenter(dashboard);
         // create sidebar on the left side
         SidebarPanel sidebar = new SidebarPanel(() -> {
-            root.setCenter(new TaskPanel());
-        }, () -> root.setCenter(dashboard));
+            root.setCenter(new TaskPanel(taskRepository));
+        }, () -> {
+            dashboard.updateCounters();
+            root.setCenter(dashboard);
+        });
         root.setLeft(sidebar);
 
         // window size
