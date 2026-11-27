@@ -6,7 +6,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskService {
-    private TaskRepository taskRepository = new TaskRepository();
+    private TaskRepository taskRepository;
+
+    public TaskService() {
+        this.taskRepository = new TaskRepository();
+    }
+
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
 
     public void addTask(String title, String description, String category, String priority, LocalDate dueDate) {
         Task newTask = new Task(title, description, category, priority, dueDate);
@@ -37,20 +45,48 @@ public class TaskService {
         }
     }
 
-    public void sortTasksByDueDate(){
+    public void sortTasksByDueDateAndPriority(){
         ArrayList<Task> tasks = taskRepository.getAllTasks();
         for(int i = 1; i < tasks.size(); i++){
             Task task = tasks.get(i);
 
             int j = i - 1;
 
-            while(j >= 0 && (task.getDueDate() == null || (tasks.get(j).getDueDate() != null) &&
-                    tasks.get(j).getDueDate().isAfter(task.getDueDate()))){
+            while(j >= 0 && moveAfter(tasks.get(j), task)){
                 tasks.set(j + 1, tasks.get(j));
                 j--;
             }
             tasks.set(j + 1, task);
         }
+    }
+
+    private boolean moveAfter(Task left, Task right) {
+        LocalDate leftDate = left.getDueDate();
+        LocalDate rightDate = right.getDueDate();
+
+        if (leftDate == null && rightDate != null) {
+            return true;
+        }
+        if (leftDate != null && rightDate == null) {
+            return false;
+        }
+        if (leftDate != null && !leftDate.equals(rightDate)) {
+            return leftDate.isAfter(rightDate);
+        }
+        return taskPriority(left.getPriority()) > taskPriority(right.getPriority());
+    }
+
+    private int taskPriority(String priority) {
+        if ("High".equals(priority)) {
+            return 1;
+        }
+        if ("Medium".equals(priority)) {
+            return 2;
+        }
+        if ("Low".equals(priority)) {
+            return 3;
+        }
+        return 4;
     }
 
     public void markTaskCompleted(String title, boolean completed){

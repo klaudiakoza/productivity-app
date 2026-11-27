@@ -2,6 +2,7 @@ package com.productivity.ui;
 
 import com.productivity.model.Task;
 import com.productivity.repository.TaskRepository;
+import com.productivity.service.TaskService;
 import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -9,6 +10,9 @@ import javafx.scene.layout.VBox;
 
 public class TaskPanel extends VBox {
     public TaskPanel(TaskRepository taskRepository) {
+        TaskService taskService = new TaskService(taskRepository);
+        taskService.sortTasksByDueDateAndPriority();
+
         setSpacing(15);
         setPadding(new Insets(25));
 
